@@ -39,6 +39,6 @@ workflows:
     jobs:
       - say-hello
       - print_deploy
-      - print_integrate
+      - print_integrate:
           requires:
             - print_deploy
