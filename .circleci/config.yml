@@ -38,5 +38,3 @@ workflows:
       - say-hello
       - print_deploy
       - print_integrate
-          requires:
-            print_deploy
