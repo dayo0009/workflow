@@ -18,17 +18,17 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
    
- print_deploy:
-   docker:
-    - image: circleci/node:13.8.0
-   steps:
-    - run: echo deploying from git
+  print_deploy:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo deploying from git
       
- print_integrate:
-   docker:
-    - image: circleci/node:13.8.0
-   steps:
-    - run: echo integrating from git
+  print_integrate:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo integrating from git
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
