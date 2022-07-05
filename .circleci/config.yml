@@ -17,6 +17,28 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+  
+  save-hello-world-output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run: mkdir -p ~/shared_space
+      - run: echo "Save Hello, World Output!" > ~/shared_space/output.txt
+
+      - persist_to_workspace:
+          root: ~/
+          path:
+            - shared_space/output.txt
+
+  print-hello-world-output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/shared_space
+      - run:  cat ~/shared_space/output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -24,3 +46,7 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - save-hello-world-output
+      - print-hello-world-output:
+          requires:
+            - save-hello-world-output
